@@ -1,8 +1,6 @@
 *.iml
 .gradle
-gradle/
 gradlew
-gradlew.bat
 ./gradle
 /local.properties
 /.idea/*

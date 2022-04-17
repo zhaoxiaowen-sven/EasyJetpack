@@ -4,18 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:background="@color/purple_200"
+    tools:context=".viewmodel.ViewModelActivity">
 
     <Button
-        android:id="@+id/bt01"
+        android:id="@+id/main_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-    <Button
-        android:id="@+id/bt02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="toViewModel" />
+        android:text="Fragment_Main" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MyLifecycleOwnerActivity" />
+        <activity android:name=".viewmodel.ViewModelActivity" />
     </application>
 
 </manifest>
