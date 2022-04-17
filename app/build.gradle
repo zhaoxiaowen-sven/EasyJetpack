@@ -39,10 +39,12 @@ android {
 
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.2.0'
     def lifecycle_version = "2.4.1"
     def arch_version = "2.1.0"
+    def appcompat_version = "1.4.1"
 
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+//    implementation "androidx.fragment:fragment-ktx:$appcompat_version"
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     // LiveData
