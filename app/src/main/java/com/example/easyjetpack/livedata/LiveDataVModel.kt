@@ -5,4 +5,5 @@ import androidx.lifecycle.ViewModel
 
 class LiveDataVModel () : ViewModel(){
     val lvData = MutableLiveData<Int>()
+    val unFlowLiveData = UnFlowLiveData<Int>()
 }

@@ -65,23 +65,23 @@ class LiveDataActivity : AppCompatActivity() {
 //        }
 //        userId.value = "id10"
 
-        val mediatorLiveData : MediatorLiveData<String> = MediatorLiveData()
-        val livedata1 = MutableLiveData<String>()
-        val livedata2 = MutableLiveData<String>()
-
-        mediatorLiveData.addSource(livedata1) {
-            Log.i(TAG, "livedata1 change $it")
-        }
-        mediatorLiveData.addSource(livedata2) {
-            Log.i(TAG, "livedata2 change $it")
-        }
-
-        mediatorLiveData.observe(this) {
-            Log.i(TAG,"onChanged:$it")
-        }
-
-        livedata1.value = "1"
-        livedata2.value = "2"
+//        val mediatorLiveData : MediatorLiveData<String> = MediatorLiveData()
+//        val livedata1 = MutableLiveData<String>()
+//        val livedata2 = MutableLiveData<String>()
+//
+//        mediatorLiveData.addSource(livedata1) {
+//            Log.i(TAG, "livedata1 change $it")
+//        }
+//        mediatorLiveData.addSource(livedata2) {
+//            Log.i(TAG, "livedata2 change $it")
+//        }
+//
+//        mediatorLiveData.observe(this) {
+//            Log.i(TAG,"onChanged:$it")
+//        }
+//
+//        livedata1.value = "1"
+//        livedata2.value = "2"
 
         val lvModel: LiveDataVModel = ViewModelProvider(this)[LiveDataVModel::class.java]
 //        lvModel.lvData.observe(this) {
@@ -92,14 +92,25 @@ class LiveDataActivity : AppCompatActivity() {
 //            }.start()
 //        }
 //
-//        findViewById<Button>(R.id.bt01).setOnClickListener {
-//            lvModel.lvData.value = 3
-//        }
-        lvModel.lvData.observe(this) {
-            Log.i(TAG, "ret = $it")
+
+        lvModel.unFlowLiveData.observe(this) {
+            Thread{
+                SystemClock.sleep(3000)
+                val intent = Intent(LiveDataActivity@this, ViewModelActivity::class.java);
+                startActivity(intent)
+            }.start()
         }
-        lvModel.lvData.postValue(100)
-        lvModel.lvData.postValue(200)
+
+        findViewById<Button>(R.id.bt01).setOnClickListener {
+            // lvModel.lvData.value = 3
+            lvModel.unFlowLiveData.value = 3
+        }
+
+//        lvModel.lvData.observe(this) {
+//            Log.i(TAG, "ret = $it")
+//        }
+//        lvModel.lvData.postValue(100)
+//        lvModel.lvData.postValue(200)
     }
 
     private fun getUser(id: String): LiveData<User> {
