@@ -22,6 +22,8 @@
         <activity android:name=".MyLifecycleOwnerActivity" />
         <activity android:name=".viewmodel.ViewModelActivity" />
         <activity android:name=".livedata.LiveDataActivity" />
+        <activity android:name=".workmanager.WorkManagerActivity" />
+        <activity android:name=".workmanager.WManagerActivity" />
     </application>
 
 </manifest>

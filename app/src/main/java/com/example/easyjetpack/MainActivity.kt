@@ -9,6 +9,7 @@ import com.example.easyjetpack.livedata.LiveDataActivity
 import com.example.easyjetpack.viewmodel.User
 import com.example.easyjetpack.viewmodel.UserModel
 import com.example.easyjetpack.viewmodel.ViewModelActivity
+import com.example.easyjetpack.workmanager.WorkManagerActivity
 
 class MainActivity : AppCompatActivity(){
 
@@ -39,6 +40,11 @@ class MainActivity : AppCompatActivity(){
         toLiveData = findViewById(R.id.bt03)
         toLiveData.setOnClickListener {
             val intent = Intent(MainActivity@this, LiveDataActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<Button>(R.id.bt04).setOnClickListener {
+            val intent = Intent(MainActivity@this, WorkManagerActivity::class.java)
             startActivity(intent)
         }
     }
