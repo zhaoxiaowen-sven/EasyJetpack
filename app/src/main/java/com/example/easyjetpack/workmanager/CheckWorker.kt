@@ -3,9 +3,11 @@ package com.example.easyjetpack.workmanager
 
 import android.content.Context
 import android.util.Log
+import androidx.work.ForegroundInfo
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
+import com.google.common.util.concurrent.ListenableFuture
 
 /**
  * Created by zhaoxiaowen on 2022/5/9
@@ -22,5 +24,9 @@ class CheckWorker(appContext: Context, workerParams: WorkerParameters):
             return Result.success(workDataOf("zxw" to "downloadUrl + ${Thread.currentThread().name}"))
         }
         return Result.success(workDataOf("zxw" to "downloadUrl"))
+    }
+
+    override fun getForegroundInfoAsync(): ListenableFuture<ForegroundInfo> {
+        return super.getForegroundInfoAsync()
     }
 }

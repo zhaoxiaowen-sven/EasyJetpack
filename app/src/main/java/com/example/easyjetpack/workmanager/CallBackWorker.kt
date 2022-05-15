@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.concurrent.futures.CallbackToFutureAdapter
 import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
-import androidx.work.impl.utils.taskexecutor.WorkManagerTaskExecutor
 import com.google.common.util.concurrent.ListenableFuture
 import java.util.concurrent.Executors
 
@@ -18,9 +17,8 @@ class CallBackWorker(
     params: WorkerParameters
 ) : ListenableWorker(context, params) {
     override fun startWork(): ListenableFuture<Result> {
-
+        Log.i("zxw", "startWork")
         return CallbackToFutureAdapter.getFuture { completer ->
-
             val callback = object : Callback {
                 @Volatile
                 var successes = 0
@@ -38,7 +36,7 @@ class CallBackWorker(
                 }
             }
 
-            downloadAsynchronously("" , callback)
+            downloadAsynchronously("https://example.com", callback)
             completer.addCancellationListener({
                 Log.i("zxw", "run cancel")
             }, Executors.newSingleThreadExecutor())
@@ -49,19 +47,22 @@ class CallBackWorker(
 
     @SuppressLint("RestrictedApi")
     private fun downloadAsynchronously(s: String, callback: Callback) {
-        taskExecutor.executeOnBackgroundThread {
-//            for (i in  1..10000) {
-//                //            Thread.sleep(100)
+        Thread {
+            Log.i("zxw", "backgroundExecutor execute")
             repeat(100) {
-                Log.i("zxw", "downloadAsynchronously + ${Thread.currentThread().name}")
-                Thread.sleep(100)
                 callback.onSuccess()
             }
-        }
+        }.start()
 
-        backgroundExecutor.execute {
-            Log.i("zxw", "backgroundExecutor execute")
-        }
+//        taskExecutor.executeOnBackgroundThread {
+////            for (i in  1..10000) {
+////                //            Thread.sleep(100)
+//            repeat(100) {
+//                Log.i("zxw", "downloadAsynchronously + ${Thread.currentThread().name}")
+//                Thread.sleep(100)
+//                callback.onSuccess()
+//            }
+//        }
     }
 }
 

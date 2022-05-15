@@ -5,12 +5,15 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.work.*
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.easyjetpack.R
-import java.util.concurrent.Executors
-import java.util.concurrent.TimeUnit
 
 class WorkManagerActivity : AppCompatActivity() {
+    companion object {
+        const val TAG = "WorkManagerActivity"
+    }
+
     lateinit var workManager: WorkManager
 
     @SuppressLint("RestrictedApi")
@@ -22,26 +25,47 @@ class WorkManagerActivity : AppCompatActivity() {
         findViewById<Button>(R.id.bt01).setOnClickListener {
 //            workManager.enqueue(uploadWorkRequest)
             // 约束条件
-            val constraints: Constraints = Constraints.Builder()
-                .setRequiresCharging(true)
-                .setRequiredNetworkType(NetworkType.UNMETERED)
-                .setRequiresBatteryNotLow(true)
-                .build()
+//            val constraints: Constraints = Constraints.Builder()
+//                .setRequiresCharging(true)
+//                .setRequiredNetworkType(NetworkType.UNMETERED)
+//                .setRequiresBatteryNotLow(true)
+//                .build()
+//
+//            val request0: WorkRequest =
+//                OneTimeWorkRequestBuilder<UploadWorker>()
+//                    .addTag("UploadWorker0")
+//                    .build()
+//            workManager.getWorkInfoByIdLiveData(request0.id).observe(this) {
+//                Log.i(TAG, "data = ${it.outputData} + ${it.progress.getInt("progress", 0)}")
+//            }
+//            workManager.enqueue(request0)
+//            Thread.sleep(1000)
+//            workManager.cancelWorkById(request0.id)
 
-            val request0: WorkRequest =
-                OneTimeWorkRequestBuilder<UploadWorker>()
-                    // 失败重试策略
-                    .setBackoffCriteria(BackoffPolicy.LINEAR, 15, TimeUnit.MINUTES)
-                    // 加急工作
-                    .setExpedited(OutOfQuotaPolicy.DROP_WORK_REQUEST)
-                    // 延迟启动
-                    .setInitialDelay(3, TimeUnit.SECONDS)
-                    .setConstraints(constraints)
-                    .addTag("11")
-                    .addTag("222")
-                    .build()
+//            workManager.getWorkInfosByTag("UploadWorker0").let {
+//                it.addListener(Runnable {
+//                    Log.i("zxw", "listening")
+//                }, Executors.newSingleThreadExecutor())
+//                Log.d("zxw", " " + it.get()[0].outputData)
+//            }
 
-            workManager.enqueue(request0)
+//            val workQuery = WorkQuery.Builder
+//                .fromTags(listOf("syncTag"))
+//                .addStates(listOf(WorkInfo.State.FAILED, WorkInfo.State.CANCELLED))
+//                .addUniqueWorkNames(
+//                    listOf("preProcess", "sync")
+//                )
+//                .build()
+
+//            val expeditedRequest01 = OneTimeWorkRequestBuilder<ExpeditedWorker>()
+//                .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+//                .build()
+//            workManager.enqueue(expeditedRequest01)
+
+//            val expeditedRequest02 = OneTimeWorkRequestBuilder<ExpeditedNotifyWorker>()
+//                .build()
+//            workManager.enqueue(expeditedRequest02)
+
 //            val request1 = OneTimeWorkRequestBuilder<CheckWorker>()
 //                .setConstraints(constraints)
 //                .addTag("update")
@@ -60,30 +84,31 @@ class WorkManagerActivity : AppCompatActivity() {
 //                .build()
 ////                .setPeriodStartTime(5, TimeUnit.SECONDS)
 //            workManager.enqueue(request3)
-            val request3 = PeriodicWorkRequestBuilder<UploadWorker>(4, TimeUnit.HOURS).build()
-
-            val request4 = PeriodicWorkRequestBuilder<UploadWorker>(1, TimeUnit.MINUTES,
-                10, TimeUnit.SECONDS)
-                .build()
+//            val request3 = PeriodicWorkRequestBuilder<UploadWorker>(4, TimeUnit.HOURS).build()
+//
+//            val request4 = PeriodicWorkRequestBuilder<UploadWorker>(1, TimeUnit.MINUTES,
+//                10, TimeUnit.SECONDS)
+//                .build()
 //            workManager.enqueue(request4)
 //            val request5 = PeriodicWorkRequestBuilder<UploadWorker>(1, TimeUnit.MINUTES, 10, TimeUnit.SECONDS).build()
 //            workManager.enqueueUniquePeriodicWork("upload",  ExistingPeriodicWorkPolicy.KEEP, request5)
-            val request6 = OneTimeWorkRequestBuilder<CallBackWorker>()
-                .addTag("callbacktest")
-                .build()
+
+
+//            val requestA = OneTimeWorkRequestBuilder<WorkerA>().build()
+//            val requestB = OneTimeWorkRequestBuilder<WorkerB>().build()
+//            val requestC = OneTimeWorkRequestBuilder<WorkerC>().build()
+//            workManager.beginWith(listOf(requestA, requestB)).then(requestC).enqueue()
+
+            // 自定义WorkerManager
+//            val request11 = OneTimeWorkRequestBuilder<MyWorker01>().build()
+//            workManager.enqueue(request11)
+
+//            val request12 = OneTimeWorkRequestBuilder<UploadWorker>().build()
+//            workManager.enqueue(request12)
+
+            val request6 = OneTimeWorkRequestBuilder<CallBackWorker>().build()
             workManager.enqueue(request6)
-
-//            val request7 = OneTimeWorkRequestBuilder<CheckWorker>().build()
-//            val request8 = OneTimeWorkRequestBuilder<UploadWorker>().build()
-//            val request9 = OneTimeWorkRequestBuilder<DownloadWorker>().setInputMerger(ArrayCreatingInputMerger::class.java).build()
-//            workManager.beginWith(listOf(request7, request8)).then(request9).enqueue()
-//            val request10 = OneTimeWorkRequestBuilder<CheckWorker>()
-
-            val request11 = OneTimeWorkRequestBuilder<MyWorker01>().build()
-            workManager.enqueue(request11)
         }
-        workManager.getWorkInfosByTag("zxw").addListener(Runnable {
 
-        }, Executors.newSingleThreadExecutor())
     }
 }

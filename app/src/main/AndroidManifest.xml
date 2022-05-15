@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.easyjetpack">
 
     <application
-        android:allowBackup="true"
         android:name=".MyApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -24,6 +25,19 @@
         <activity android:name=".livedata.LiveDataActivity" />
         <activity android:name=".workmanager.WorkManagerActivity" />
         <activity android:name=".workmanager.WManagerActivity" />
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            tools:node="merge"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false">
+            <!-- If you are using androidx.startup to initialize other components -->
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                tools:node="remove"
+                android:value="androidx.startup" />
+        </provider>
     </application>
+
 
 </manifest>
