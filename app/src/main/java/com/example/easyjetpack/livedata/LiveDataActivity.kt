@@ -111,6 +111,39 @@ class LiveDataActivity : AppCompatActivity() {
 //        }
 //        lvModel.lvData.postValue(100)
 //        lvModel.lvData.postValue(200)
+
+
+        //        lvModel.liveEvent.observe(this) {
+//            Thread{
+//                SystemClock.sleep(3000)
+//                val intent = Intent(LiveDataActivity@this, ViewModelActivity::class.java);
+//                startActivity(intent)
+//            }.start()
+//        }
+//
+//        findViewById<Button>(R.id.bt01).setOnClickListener {
+//            // lvModel.lvData.value = 3
+//            lvModel.liveEvent.value = 3
+//        }
+
+//        lvModel.lvData.observe(this) {
+//            Log.i(TAG, "ret = $it")
+//        }
+//        lvModel.lvData.postValue(100)
+//        lvModel.lvData.postValue(200)
+
+        lvModel.busevent.observe(this) {
+            Thread{
+                SystemClock.sleep(3000)
+                val intent = Intent(LiveDataActivity@this, ViewModelActivity::class.java);
+                startActivity(intent)
+            }.start()
+        }
+
+        findViewById<Button>(R.id.bt01).setOnClickListener {
+            // lvModel.lvData.value = 3
+            lvModel.busevent.value = 3
+        }
     }
 
     private fun getUser(id: String): LiveData<User> {

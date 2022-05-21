@@ -1,4 +1,4 @@
-package com.example.easyjetpack.livedata;
+package com.example.easyjetpack.livedata.backflow;
 
 import static androidx.lifecycle.Lifecycle.State.DESTROYED;
 
