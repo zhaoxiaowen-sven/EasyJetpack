@@ -26,17 +26,17 @@
         <activity android:name=".workmanager.WorkManagerActivity" />
         <activity android:name=".workmanager.WManagerActivity" />
 
-        <provider
-            android:name="androidx.startup.InitializationProvider"
-            tools:node="merge"
-            android:authorities="${applicationId}.androidx-startup"
-            android:exported="false">
-            <!-- If you are using androidx.startup to initialize other components -->
-            <meta-data
-                android:name="androidx.work.WorkManagerInitializer"
-                tools:node="remove"
-                android:value="androidx.startup" />
-        </provider>
+<!--        <provider-->
+<!--            android:name="androidx.startup.InitializationProvider"-->
+<!--            tools:node="merge"-->
+<!--            android:authorities="${applicationId}.androidx-startup"-->
+<!--            android:exported="false">-->
+<!--            &lt;!&ndash; If you are using androidx.startup to initialize other components &ndash;&gt;-->
+<!--            <meta-data-->
+<!--                android:name="androidx.work.WorkManagerInitializer"-->
+<!--                tools:node="remove"-->
+<!--                android:value="androidx.startup" />-->
+<!--        </provider>-->
     </application>
 
 

@@ -97,17 +97,20 @@ class WorkManagerActivity : AppCompatActivity() {
 //            val requestA = OneTimeWorkRequestBuilder<WorkerA>().build()
 //            val requestB = OneTimeWorkRequestBuilder<WorkerB>().build()
 //            val requestC = OneTimeWorkRequestBuilder<WorkerC>().build()
-//            workManager.beginWith(listOf(requestA, requestB)).then(requestC).enqueue()
+//            workManager.beginWith(listOf(requestA, requestB))
+//                .then(requestC)
+//                .then(requestC)
+//                .enqueue()
 
             // 自定义WorkerManager
-//            val request11 = OneTimeWorkRequestBuilder<MyWorker01>().build()
-//            workManager.enqueue(request11)
+            val request11 = OneTimeWorkRequestBuilder<MyWorker01>().build()
+            workManager.enqueue(request11)
 
 //            val request12 = OneTimeWorkRequestBuilder<UploadWorker>().build()
 //            workManager.enqueue(request12)
 
-            val request6 = OneTimeWorkRequestBuilder<CallBackWorker>().build()
-            workManager.enqueue(request6)
+//            val request6 = OneTimeWorkRequestBuilder<CallBackWorker>().build()
+//            workManager.enqueue(request6)
         }
 
     }
